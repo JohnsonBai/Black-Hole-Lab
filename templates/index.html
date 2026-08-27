@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Black Hole Lab</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- =========================================
+         Initial Tutorial
+         ========================================= -->
+
+    <div id="tutorial-overlay">
+
+        <div class="tutorial-window">
+
+            <!-- Close / Skip -->
+
+            <button
+                id="tutorial-close"
+                class="tutorial-close"
+                aria-label="Skip tutorial"
+            >
+                ×
+            </button>
+
+
+            <!-- Step Indicator -->
+
+            <div class="tutorial-step">
+                STEP <span id="tutorial-step-number">1</span> / 5
+            </div>
+
+
+            <!-- Tutorial Title -->
+
+            <h2 id="tutorial-title">
+                Step 1: Meet the Black Hole
+            </h2>
+
+
+            <!-- Tutorial Content -->
+
+            <div class="tutorial-content">
+
+                <img
+                    id="tutorial-image"
+                    src=""
+                    alt="Tutorial illustration"
+                >
+
+                <p id="tutorial-text">
+                    This is the event horizon.
+                    Nothing that crosses it can escape.
+                </p>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <div class="tutorial-navigation">
+
+                <button
+                    id="tutorial-prev"
+                    class="tutorial-arrow"
+                    aria-label="Previous step"
+                >
+                    &lt;
+                </button>
+
+
+                <div class="tutorial-dots">
+
+                    <span class="tutorial-dot active"></span>
+                    <span class="tutorial-dot"></span>
+                    <span class="tutorial-dot"></span>
+                    <span class="tutorial-dot"></span>
+                    <span class="tutorial-dot"></span>
+
+                </div>
+
+
+                <button
+                    id="tutorial-next"
+                    class="tutorial-arrow"
+                    aria-label="Next step"
+                >
+                    &gt;
+                </button>
+
+            </div>
+
+
+            <!-- Get Started -->
+
+            <button
+                id="tutorial-start"
+                class="tutorial-start"
+            >
+                Get Started
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================
+         Header
+         ========================================= -->
+
+    <header>
+
+        <h1>BLACK HOLE LAB</h1>
+
+        <p>Explore gravity, light, and time near a black hole.</p>
+
+        <div class="subtitle">
+            INTERACTIVE PHYSICS SIMULATION
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         Main Visualization
+         ========================================= -->
+
+    <main>
+
+        <section class="main-section">
+
+            <button id="tutorial-toggle">Tutorial</button>
+
+            <!-- =====================================
+                 Black Hole Visualization
+                 ===================================== -->
+
+            <div id="black-hole-container">
+
+                <div id="accretion-disk-back"></div>
+
+                <div id="photon-orbit"></div>
+
+                <div id="black-hole"></div>
+
+                <div id="accretion-disk-front"></div>
+
+                <canvas id="light-ray"></canvas>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 Physics Information
+                 ===================================== -->
+
+            <div class="physics-info">
+
+
+                <!-- Event Horizon -->
+
+                <div class="info-card">
+
+                    <div class="card-header">
+
+                        <h2>Event Horizon</h2>
+
+                        <button
+                            class="info-button"
+                            data-info="event-horizon-info"
+                            aria-label="Information about event horizon"
+                        >
+                            i
+                        </button>
+
+                    </div>
+
+                    <p>
+                        Radius:
+                        <span id="radius-value">
+                            29.53
+                        </span>
+                        km
+                    </p>
+
+                    <div class="info-popup" id="event-horizon-info">
+
+                        <button class="info-close">×</button>
+
+                        <h3>Event Horizon</h3>
+
+                        <p>
+                            The event horizon is the boundary of a black hole.
+                            Once something crosses this boundary, it cannot escape.
+                        </p>
+
+                        <p class="info-tip">
+                            In the simulation, the black circular region represents
+                            the black hole. Its outer edge represents the event horizon.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Photon Orbit -->
+
+                <div class="info-card">
+
+                    <div class="card-header">
+
+                        <h2>Photon Orbit</h2>
+
+                        <button
+                            class="info-button"
+                            data-info="photon-orbit-info"
+                            aria-label="Information about photon orbit"
+                        >
+                            i
+                        </button>
+
+                    </div>
+
+                    <p>
+                        Radius:
+                        <span id="photon-radius-value">
+                            44.29
+                        </span>
+                        km
+                    </p>
+
+                    <div class="info-popup" id="photon-orbit-info">
+
+                        <button class="info-close">×</button>
+
+                        <h3>Photon Orbit</h3>
+
+                        <p>
+                            Light is affected by the strong gravity of a black hole.
+                            Near the black hole, light can follow a curved path around it.
+                        </p>
+
+                        <p class="info-tip">
+                            In the simulation, the orange glowing circle represents
+                            the photon orbit.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Light Deflection -->
+
+                <div class="info-card">
+
+                    <div class="card-header">
+
+                        <h2>Light Deflection</h2>
+
+                        <button
+                            class="info-button"
+                            data-info="light-deflection-info"
+                            aria-label="Information about light deflection"
+                        >
+                            i
+                        </button>
+
+                    </div>
+
+                    <p>
+                        Deflection Angle:
+                        <span id="deflection-value">
+                            0.00
+                        </span>
+                        °
+                    </p>
+
+                    <p>
+                        Critical Impact:
+                        <span id="critical-impact-value">
+                            2.60
+                        </span>
+                        rₛ
+                    </p>
+
+                    <div class="info-popup" id="light-deflection-info">
+
+                        <button class="info-close">×</button>
+
+                        <h3>Light Deflection</h3>
+
+                        <p>
+                            The gravity of a black hole can bend the path of light.
+                            The closer the light passes to the black hole,
+                            the stronger the bending becomes.
+                        </p>
+
+                        <p class="info-tip">
+                            In the simulation, the white line shows the path of the light.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Light Status -->
+
+                <div class="info-card">
+
+                    <div class="card-header">
+
+                        <h2>Light Status</h2>
+
+                        <button
+                            class="info-button"
+                            data-info="light-status-info"
+                            aria-label="Information about light status"
+                        >
+                            i
+                        </button>
+
+                    </div>
+
+                    <p id="photon-warning">
+                        Light is far from the photon orbit.
+                    </p>
+
+                    <div class="info-popup" id="light-status-info">
+
+                        <button class="info-close">×</button>
+
+                        <h3>Light Status</h3>
+
+                        <p>
+                            This tells you what is happening to the light
+                            as it passes near the black hole.
+                        </p>
+
+                        <p class="info-tip">
+                            Watch the white light ray and the message change
+                            as you move the Impact Parameter slider.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             Control Panel
+             ========================================= -->
+
+        <section class="control-panel">
+
+
+            <!-- Mass -->
+
+            <div class="control">
+
+                <div class="control-header">
+
+                    <label for="mass">
+                        Black Hole Mass
+                    </label>
+
+                    <button
+                        class="info-button"
+                        data-info="mass-info"
+                        aria-label="Information about black hole mass"
+                    >
+                        i
+                    </button>
+
+                </div>
+
+                <input
+                    type="range"
+                    id="mass"
+                    min="1"
+                    max="20"
+                    value="10"
+                    step="0.1"
+                >
+
+                <p>
+                    <span id="mass-value">
+                        10.0
+                    </span>
+                    M☉
+                </p>
+
+
+                <div class="info-popup" id="mass-info">
+
+                    <button class="info-close">×</button>
+
+                    <h3>Black Hole Mass</h3>
+
+                    <p>
+                        Mass determines the strength of a black hole's
+                        gravitational field and the size of its event horizon.
+                        M☉ — Solar Mass.
+                        M☉ means the mass of the Sun.
+                        It is a convenient unit for measuring the mass of a black hole.
+                    </p>
+
+                    <p>
+                        A more massive black hole has a larger event horizon.
+                    </p>
+
+                    <p class="info-tip">
+                        Try moving the slider and watch how the black hole changes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Spin -->
+
+            <div class="control">
+
+                <div class="control-header">
+
+                    <label for="spin">
+                        Black Hole Spin
+                    </label>
+
+                    <button
+                        class="info-button"
+                        data-info="spin-info"
+                        aria-label="Information about black hole spin"
+                    >
+                        i
+                    </button>
+
+                </div>
+
+                <input
+                    type="range"
+                    id="spin"
+                    min="0"
+                    max="0.998"
+                    value="0"
+                    step="0.001"
+                >
+
+                <p>
+                    <span id="spin-value">
+                        0.000
+                    </span>
+                </p>
+
+
+                <div class="info-popup" id="spin-info">
+
+                    <button class="info-close">×</button>
+
+                    <h3>Black Hole Spin</h3>
+
+                    <p>
+                        A rotating black hole is described by its
+                        dimensionless spin parameter.
+                    </p>
+
+                    <p>
+                        A value of 0 means no rotation, while larger
+                        values represent faster rotation.
+                    </p>
+
+                    <p class="info-tip">
+                        Increase the spin and observe how the black hole's
+                        properties change.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Impact Parameter -->
+
+            <div class="control">
+
+                <div class="control-header">
+
+                    <label for="ray-distance">
+                        Impact Parameter
+                    </label>
+
+                    <button
+                        class="info-button"
+                        data-info="impact-info"
+                        aria-label="Information about impact parameter"
+                    >
+                        i
+                    </button>
+
+                </div>
+
+                <input
+                    type="range"
+                    id="ray-distance"
+                    min="1.5"
+                    max="8"
+                    value="5"
+                    step="0.1"
+                >
+
+                <p>
+                    <span id="ray-distance-value">
+                        5.0
+                    </span>
+                    rₛ
+                </p>
+
+
+                <div class="info-popup" id="impact-info">
+
+                    <button class="info-close">×</button>
+
+                    <h3>Impact Parameter</h3>
+
+                    <p>
+                        The impact parameter describes how close a light
+                        ray would pass to the black hole if gravity did
+                        not bend its path.
+                        rₛ — Schwarzschild Radius.
+                        rₛ is the characteristic radius of a black hole.
+                        For a non-spinning black hole, it is the radius of the event horizon.
+                    </p>
+
+                    <p>
+                        A smaller impact parameter means that the light
+                        passes closer to the black hole and experiences
+                        stronger gravitational deflection.
+                    </p>
+
+                    <p class="info-tip">
+                        Move the slider closer to the critical value and
+                        watch the light become strongly deflected.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Time Dilation -->
+
+            <div class="control">
+
+                <div class="control-header">
+
+                    <label for="time-distance">
+                        Time Dilation
+                    </label>
+
+                    <button
+                        class="info-button"
+                        data-info="dilation-info"
+                        aria-label="Information about time dilation"
+                    >
+                        i
+                    </button>
+
+                </div>
+
+                <input
+                    type="range"
+                    id="time-distance"
+                    min="1.05"
+                    max="10"
+                    value="5"
+                    step="0.05"
+                >
+
+                <p>
+                    <span id="time-distance-value">
+                        5.00
+                    </span>
+                    rₛ
+                </p>
+
+
+                <div class="info-popup" id="dilation-info">
+
+                    <button class="info-close">×</button>
+
+                    <h3>Time Dilation</h3>
+
+                    <p>
+                        According to general relativity, gravity affects
+                        the passage of time.
+                    </p>
+
+                    <p>
+                        Clocks closer to a black hole appear to run more
+                        slowly compared with clocks farther away.
+                    </p>
+
+                    <p class="info-tip">
+                        Move the slider closer to the event horizon and
+                        compare the two clocks below.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             Time Dilation Experiment
+             ========================================= -->
+
+        <section class="time-dilation-panel">
+
+            <div class="experiment-header">
+
+                <h2>Time Dilation</h2>
+
+                <button
+                    class="info-button"
+                    data-info="experiment-info"
+                    aria-label="Information about the time dilation experiment"
+                >
+                    i
+                </button>
+
+            </div>
+
+
+            <p>
+                Compare the passage of time near and far
+                from the black hole.
+            </p>
+
+
+            <div class="info-popup experiment-info-popup" id="experiment-info">
+
+                <button class="info-close">×</button>
+
+                <h3>About This Experiment</h3>
+
+                <p>
+                    This experiment compares two clocks:
+                    one far from the black hole and one closer to it.
+                </p>
+
+                <p>
+                    The closer clock experiences stronger gravitational
+                    time dilation and therefore runs more slowly.
+                </p>
+
+            </div>
+
+            <div class="clocks">
+
+
+                <!-- Far Clock -->
+
+                <div class="clock-card">
+
+                    <h3>
+                        Far Away Observer
+                    </h3>
+
+                    <div id="far-clock">
+                        00:00:00
+                    </div>
+
+                    <p>
+                        Normal time
+                    </p>
+
+                </div>
+
+
+
+                <!-- Near Clock -->
+
+                <div class="clock-card">
+
+                    <h3>
+                        Near Black Hole
+                    </h3>
+
+                    <div id="near-clock">
+                        00:00:00
+                    </div>
+
+                    <p>
+                        Slower time
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <p id="time-explanation">
+                Move the slider closer to the black hole.
+            </p>
+
+            <p id="time-factor-display">
+                Time passes at 100% of the rate far away.
+            </p>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         JavaScript
+         ========================================= -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+
+</html>
