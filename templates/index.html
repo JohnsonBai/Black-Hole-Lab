@@ -18,9 +18,7 @@
 
 <body>
 
-    <!-- =========================================
-         Initial Tutorial
-         ========================================= -->
+    <!-- Initial Tutorial -->
 
     <div id="tutorial-overlay">
 
@@ -36,20 +34,17 @@
                 ×
             </button>
 
-
             <!-- Step Indicator -->
 
             <div class="tutorial-step">
                 STEP <span id="tutorial-step-number">1</span> / 5
             </div>
 
-
             <!-- Tutorial Title -->
 
             <h2 id="tutorial-title">
                 Step 1: Meet the Black Hole
             </h2>
-
 
             <!-- Tutorial Content -->
 
@@ -68,7 +63,6 @@
 
             </div>
 
-
             <!-- Navigation -->
 
             <div class="tutorial-navigation">
@@ -81,7 +75,6 @@
                     &lt;
                 </button>
 
-
                 <div class="tutorial-dots">
 
                     <span class="tutorial-dot active"></span>
@@ -92,7 +85,6 @@
 
                 </div>
 
-
                 <button
                     id="tutorial-next"
                     class="tutorial-arrow"
@@ -102,7 +94,6 @@
                 </button>
 
             </div>
-
 
             <!-- Get Started -->
 
@@ -117,9 +108,7 @@
 
     </div>
 
-    <!-- =========================================
-         Header
-         ========================================= -->
+    <!-- Header -->
 
     <header>
 
@@ -133,11 +122,7 @@
 
     </header>
 
-
-
-    <!-- =========================================
-         Main Visualization
-         ========================================= -->
+    <!-- Main Visualization -->
 
     <main>
 
@@ -145,9 +130,7 @@
 
             <button id="tutorial-toggle">Tutorial</button>
 
-            <!-- =====================================
-                 Black Hole Visualization
-                 ===================================== -->
+            <!-- =Black Hole Visualization -->
 
             <div id="black-hole-container">
 
@@ -163,14 +146,9 @@
 
             </div>
 
-
-
-            <!-- =====================================
-                 Physics Information
-                 ===================================== -->
+            <!-- Physics Information -->
 
             <div class="physics-info">
-
 
                 <!-- Event Horizon -->
 
@@ -218,7 +196,6 @@
 
                 </div>
 
-
                 <!-- Photon Orbit -->
 
                 <div class="info-card">
@@ -264,7 +241,6 @@
                     </div>
 
                 </div>
-
 
                 <!-- Light Deflection -->
 
@@ -320,7 +296,6 @@
 
                 </div>
 
-
                 <!-- Light Status -->
 
                 <div class="info-card">
@@ -368,14 +343,9 @@
 
         </section>
 
-
-
-        <!-- =========================================
-             Control Panel
-             ========================================= -->
+        <!-- Control Panel -->
 
         <section class="control-panel">
-
 
             <!-- Mass -->
 
@@ -413,7 +383,6 @@
                     M☉
                 </p>
 
-
                 <div class="info-popup" id="mass-info">
 
                     <button class="info-close">×</button>
@@ -439,8 +408,6 @@
                 </div>
 
             </div>
-
-
 
             <!-- Spin -->
 
@@ -477,7 +444,6 @@
                     </span>
                 </p>
 
-
                 <div class="info-popup" id="spin-info">
 
                     <button class="info-close">×</button>
@@ -502,8 +468,6 @@
                 </div>
 
             </div>
-
-
 
             <!-- Impact Parameter -->
 
@@ -541,7 +505,6 @@
                     rₛ
                 </p>
 
-
                 <div class="info-popup" id="impact-info">
 
                     <button class="info-close">×</button>
@@ -571,8 +534,6 @@
                 </div>
 
             </div>
-
-
 
             <!-- Time Dilation -->
 
@@ -610,7 +571,6 @@
                     rₛ
                 </p>
 
-
                 <div class="info-popup" id="dilation-info">
 
                     <button class="info-close">×</button>
@@ -636,14 +596,9 @@
 
             </div>
 
-
         </section>
 
-
-
-        <!-- =========================================
-             Time Dilation Experiment
-             ========================================= -->
+        <!-- Time Dilation Experiment -->
 
         <section class="time-dilation-panel">
 
@@ -661,12 +616,10 @@
 
             </div>
 
-
             <p>
                 Compare the passage of time near and far
                 from the black hole.
             </p>
-
 
             <div class="info-popup experiment-info-popup" id="experiment-info">
 
@@ -688,7 +641,6 @@
 
             <div class="clocks">
 
-
                 <!-- Far Clock -->
 
                 <div class="clock-card">
@@ -706,8 +658,6 @@
                     </p>
 
                 </div>
-
-
 
                 <!-- Near Clock -->
 
@@ -727,9 +677,7 @@
 
                 </div>
 
-
             </div>
-
 
             <p id="time-explanation">
                 Move the slider closer to the black hole.
@@ -739,20 +687,13 @@
                 Time passes at 100% of the rate far away.
             </p>
 
-
         </section>
-
 
     </main>
 
-
-
-    <!-- =========================================
-         JavaScript
-         ========================================= -->
+    <!-- JavaScript -->
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-
 
 </body>
 
