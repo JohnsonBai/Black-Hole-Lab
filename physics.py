@@ -4,7 +4,6 @@ G = 6.67430e-11
 c = 299792458
 SOLAR_MASS = 1.989e30
 
-
 def schwarzschild_radius(mass_solar):
     mass_kg = mass_solar * SOLAR_MASS
 

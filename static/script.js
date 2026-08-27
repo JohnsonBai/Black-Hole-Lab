@@ -1,11 +1,6 @@
-/* =========================================================
-   BLACK HOLE INTERACTIVE SIMULATION
-   ========================================================= */
+// BLACK HOLE INTERACTIVE SIMULATION
 
-
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
+// ELEMENTS
 
 const massSlider = document.getElementById("mass");
 const massValue = document.getElementById("mass-value");
@@ -46,10 +41,7 @@ const photonWarning =
 const criticalImpactValue =
     document.getElementById("critical-impact-value");
 
-
-/* =========================================================
-   CANVAS
-   ========================================================= */
+// CANVAS
 
 let ctx = null;
 
@@ -57,10 +49,7 @@ if (lightRayCanvas) {
     ctx = lightRayCanvas.getContext("2d");
 }
 
-
-/* =========================================================
-   TIME DILATION ELEMENTS
-   ========================================================= */
+// TIME DILATION ELEMENTS
 
 const timeDistanceSlider =
     document.getElementById("time-distance");
@@ -81,9 +70,7 @@ const timeFactorDisplay =
     document.getElementById("time-factor-display");
 
 
-/* =========================================================
-   BLACK HOLE CALCULATION
-   ========================================================= */
+// BLACK HOLE CALCULATION
 
 async function updateBlackHole() {
 
@@ -94,17 +81,13 @@ async function updateBlackHole() {
         return;
     }
 
-
     const mass =
         Number(massSlider.value);
 
     const spin =
         Number(spinSlider.value);
 
-
-    /* -----------------------------------------
-       Display values
-    ----------------------------------------- */
+    // Display values
 
     if (massValue) {
         massValue.textContent =
@@ -116,18 +99,13 @@ async function updateBlackHole() {
             spin.toFixed(3);
     }
 
-
-    /* -----------------------------------------
-       Ask backend for Kerr calculation
-    ----------------------------------------- */
+    // Ask backend for Kerr calculation
 
     try {
-
         const response =
             await fetch(
                 `/calculate?mass=${encodeURIComponent(mass)}&spin=${encodeURIComponent(spin)}`
             );
-
 
         if (!response.ok) {
             throw new Error(
@@ -135,14 +113,10 @@ async function updateBlackHole() {
             );
         }
 
-
         const data =
             await response.json();
 
-
-        /* -----------------------------------------
-           Physical values
-        ----------------------------------------- */
+        // Physical values
 
         if (radiusValue) {
 
@@ -163,10 +137,7 @@ async function updateBlackHole() {
 
         }
 
-
-        /* -----------------------------------------
-           Visual sizes
-        ----------------------------------------- */
+        // Visual sizes
 
         const eventRadius =
             Number(
@@ -185,10 +156,7 @@ async function updateBlackHole() {
         const photonSize =
             50 + photonRadius * 2;
 
-
-        /* -----------------------------------------
-           Photon orbit
-        ----------------------------------------- */
+        // Photon orbit
 
         if (photonOrbit) {
 
@@ -206,10 +174,7 @@ async function updateBlackHole() {
 
         }
 
-
-        /* -----------------------------------------
-           Black hole
-        ----------------------------------------- */
+        // Black hole
 
         if (blackHole) {
 
@@ -227,14 +192,8 @@ async function updateBlackHole() {
 
         }
 
-
-        /* -----------------------------------------
-           Accretion disk
-        ----------------------------------------- */
-
-        // ==========================================
+        // Accretion disk
         // Update accretion disk
-        // ==========================================
 
         const diskWidth = size * 4;
         const diskHeight = size * 1.3;
@@ -268,15 +227,11 @@ async function updateBlackHole() {
             "Black hole calculation error:",
             error
         );
-
     }
-
 }
 
 
-/* =========================================================
-   LIGHT RAY
-   ========================================================= */
+// LIGHT RAY
 
 function drawLightRay() {
 
@@ -289,17 +244,13 @@ function drawLightRay() {
         return;
     }
 
-
     const mass =
         Number(massSlider.value);
 
     const distance =
         Number(rayDistanceSlider.value);
 
-
-    /* =========================================
-       Physical constants
-    ========================================= */
+    // Physical constants
 
     const G =
         6.67430e-11;
@@ -310,39 +261,26 @@ function drawLightRay() {
     const solarMass =
         1.989e30;
 
-
-    /* =========================================
-       Black hole mass
-    ========================================= */
+    // Black hole mass
 
     const massKg =
         mass * solarMass;
 
-
-    /* =========================================
-       Schwarzschild radius
-    ========================================= */
+    // Schwarzschild radius
 
     const rs =
         2 * G * massKg /
         (c * c);
 
-
-    /* =========================================
-       Impact parameter
-    ========================================= */
+    // Impact parameter
 
     const b =
         distance * rs;
 
-
-    /* =========================================
-       Critical impact parameter
-    ========================================= */
+    // Critical impact parameter
 
     const criticalImpact =
         3 * Math.sqrt(3) / 2;
-
 
     if (criticalImpactValue) {
 
@@ -351,29 +289,21 @@ function drawLightRay() {
 
     }
 
-
-    /* =========================================
-       Deflection angle
-    ========================================= */
+    // Deflection angle
 
     let deflectionDegrees =
         0;
 
-
     if (b > 0) {
-
         const deflectionAngle =
             4 * G * massKg /
             (b * c * c);
-
 
         deflectionDegrees =
             deflectionAngle *
             180 /
             Math.PI;
-
     }
-
 
     if (deflectionValue) {
 
@@ -381,39 +311,30 @@ function drawLightRay() {
             distance <=
             criticalImpact
         ) {
-
             deflectionValue.textContent =
                 "Captured";
-
         } else {
-
             deflectionValue.textContent =
                 deflectionDegrees.toFixed(1);
-
         }
 
     }
 
 
-    /* =========================================
-       Canvas size
-    ========================================= */
+    // Canvas size
 
     const parent =
         lightRayCanvas.parentElement;
 
-
     if (!parent) {
         return;
     }
-
 
     const width =
         parent.clientWidth;
 
     const height =
         parent.clientHeight;
-
 
     if (
         width <= 0 ||
@@ -422,13 +343,11 @@ function drawLightRay() {
         return;
     }
 
-
     lightRayCanvas.width =
         width;
 
     lightRayCanvas.height =
         height;
-
 
     ctx.clearRect(
         0,
@@ -437,10 +356,7 @@ function drawLightRay() {
         height
     );
 
-
-    /* =========================================
-       Canvas center
-    ========================================= */
+    // Canvas center
 
     const centerX =
         width / 2;
@@ -448,18 +364,12 @@ function drawLightRay() {
     const centerY =
         height / 2;
 
-
-    /* =========================================
-       Schwarzschild units
-    ========================================= */
+    // Schwarzschild units
 
     const M =
         0.5;
 
-
-    /* =========================================
-       Numerical integration
-    ========================================= */
+    // Numerical integration
 
     const step =
         0.01;
@@ -470,7 +380,6 @@ function drawLightRay() {
     const endX =
         5;
 
-
     let x =
         startX;
 
@@ -480,13 +389,9 @@ function drawLightRay() {
     let slope =
         0;
 
-
     const points = [];
 
-
-    /* =========================================
-       Integrate light path
-    ========================================= */
+    // Integrate light path
 
     while (x <= endX) {
 
@@ -496,21 +401,18 @@ function drawLightRay() {
                 y * y
             );
 
-
-        /* Event horizon */
+        // Event horizon
 
         if (r <= 1.0) {
             break;
         }
-
 
         points.push({
             x: x,
             y: y
         });
 
-
-        /* Gravitational bending */
+        // Gravitational bending
 
         const acceleration =
             -3 *
@@ -518,14 +420,11 @@ function drawLightRay() {
             y /
             Math.pow(r, 5);
 
-
         slope +=
             acceleration * step;
 
-
         y +=
             slope * step;
-
 
         x +=
             step;
@@ -533,18 +432,14 @@ function drawLightRay() {
     }
 
 
-    /* =========================================
-       Draw ray
-    ========================================= */
+    // Draw ray
 
     const scale =
         50;
 
-
     if (points.length > 1) {
 
         ctx.beginPath();
-
 
         points.forEach(
             (point, index) => {
@@ -557,26 +452,21 @@ function drawLightRay() {
                     centerY -
                     point.y * scale;
 
-
                 if (index === 0) {
 
                     ctx.moveTo(
                         screenX,
                         screenY
                     );
-
                 } else {
-
                     ctx.lineTo(
                         screenX,
                         screenY
                     );
-
                 }
 
             }
         );
-
 
         ctx.strokeStyle =
             "white";
@@ -590,21 +480,16 @@ function drawLightRay() {
         ctx.shadowBlur =
             10;
 
-
         ctx.stroke();
 
-
-        /* Reset shadow */
+        // Reset shadow
 
         ctx.shadowBlur =
             0;
-
     }
 
 
-    /* =========================================
-       Status text
-    ========================================= */
+    // Status text
 
     if (photonWarning) {
 
@@ -612,27 +497,21 @@ function drawLightRay() {
             distance <=
             criticalImpact
         ) {
-
             photonWarning.textContent =
                 "Light is captured by the black hole.";
-
         }
 
         else if (
             distance <
             criticalImpact + 0.4
         ) {
-
             photonWarning.textContent =
                 "Light is near the critical orbit.";
-
         }
 
         else {
-
             photonWarning.textContent =
                 "Light escapes the black hole.";
-
         }
 
     }
@@ -640,9 +519,7 @@ function drawLightRay() {
 }
 
 
-/* =========================================================
-   RAY DISTANCE
-   ========================================================= */
+// RAY DISTANCE
 
 function updateRayDistance() {
 
@@ -650,32 +527,23 @@ function updateRayDistance() {
         return;
     }
 
-
     const distance =
         Number(
             rayDistanceSlider.value
         );
 
-
     if (rayDistanceValue) {
-
         rayDistanceValue.textContent =
             distance.toFixed(1);
-
     }
-
 
     drawLightRay();
 
 }
 
-
-/* =========================================================
-   EVENT LISTENERS
-   ========================================================= */
+// EVENT LISTENERS
 
 if (massSlider) {
-
     massSlider.addEventListener(
         "input",
         updateBlackHole
@@ -685,40 +553,32 @@ if (massSlider) {
         "input",
         drawLightRay
     );
-
 }
 
 
 if (spinSlider) {
-
     spinSlider.addEventListener(
         "input",
         updateBlackHole
     );
-
 }
 
 
 if (rayDistanceSlider) {
-
     rayDistanceSlider.addEventListener(
         "input",
         updateRayDistance
     );
-
 }
 
 
-/* =========================================================
-   TIME DILATION
-   ========================================================= */
+//TIME DILATION
 
 function updateTimeDilation() {
 
     if (!timeDistanceSlider) {
         return;
     }
-
 
     const distance =
         Math.max(
@@ -728,22 +588,15 @@ function updateTimeDilation() {
             1.001
         );
 
-
-    /* -----------------------------------------
-       Display distance
-    ----------------------------------------- */
+    // Display distance
 
     if (timeDistanceValue) {
-
         timeDistanceValue.textContent =
             distance.toFixed(2);
-
     }
 
 
-    /* -----------------------------------------
-       Time dilation factor
-    ----------------------------------------- */
+    // Time dilation factor
 
     const timeFactor =
         Math.sqrt(
@@ -753,10 +606,7 @@ function updateTimeDilation() {
             )
         );
 
-
-    /* -----------------------------------------
-       Clock speed
-    ----------------------------------------- */
+    // Clock speed
 
     if (farClock) {
 
@@ -765,69 +615,51 @@ function updateTimeDilation() {
 
     }
 
-
     if (nearClock) {
-
         nearClock.textContent =
             timeFactor.toFixed(2) +
             " ×";
-
     }
 
 
-    /* -----------------------------------------
-       Explanation
-    ----------------------------------------- */
+    // Explanation
 
     if (timeExplanation) {
 
         if (distance > 5) {
-
             timeExplanation.textContent =
                 "Far from the black hole, time passes almost normally.";
-
         }
 
         else if (distance > 2) {
-
             timeExplanation.textContent =
                 "Closer to the black hole, time passes more slowly.";
-
         }
 
         else {
-
             timeExplanation.textContent =
                 "Very close to the event horizon, time passes much more slowly.";
-
         }
 
     }
 
 
-    /* -----------------------------------------
-       Percentage
-    ----------------------------------------- */
+    // Percentage
 
     const percentage =
         timeFactor * 100;
 
-
     if (timeFactorDisplay) {
-
         timeFactorDisplay.textContent =
             "Time passes at " +
             percentage.toFixed(0) +
             "% of the rate far away.";
-
     }
 
 }
 
 
-/* =========================================================
-   CLOCK ANIMATION
-   ========================================================= */
+// CLOCK ANIMATION
 
 let farTime =
     0;
@@ -838,16 +670,13 @@ let nearTime =
 let lastTime =
     performance.now();
 
-
 function updateClocks(currentTime) {
 
     const deltaTime =
         (currentTime - lastTime) / 1000;
 
-
     lastTime =
         currentTime;
-
 
     if (timeDistanceSlider) {
 
@@ -859,7 +688,6 @@ function updateClocks(currentTime) {
                 1.001
             );
 
-
         const timeFactor =
             Math.sqrt(
                 Math.max(
@@ -868,37 +696,29 @@ function updateClocks(currentTime) {
                 )
             );
 
-
-        /* Far clock */
+        // Far clock
 
         farTime +=
             deltaTime;
 
 
-        /* Near clock */
+        // Near clock
 
         nearTime +=
             deltaTime *
             timeFactor;
 
-
         if (farClock) {
-
             farClock.textContent =
                 formatTime(farTime);
-
         }
 
-
         if (nearClock) {
-
             nearClock.textContent =
                 formatTime(nearTime);
-
         }
 
     }
-
 
     requestAnimationFrame(
         updateClocks
@@ -906,10 +726,7 @@ function updateClocks(currentTime) {
 
 }
 
-
-/* =========================================================
-   FORMAT CLOCK
-   ========================================================= */
+// FORMAT CLOCK
 
 function formatTime(seconds) {
 
@@ -918,12 +735,10 @@ function formatTime(seconds) {
             seconds / 60
         );
 
-
     const secs =
         Math.floor(
             seconds % 60
         );
-
 
     return (
         String(minutes).padStart(2, "0") +
@@ -934,23 +749,17 @@ function formatTime(seconds) {
 }
 
 
-/* =========================================================
-   TIME DILATION EVENTS
-   ========================================================= */
+// TIME DILATION EVENTS
 
 if (timeDistanceSlider) {
-
     timeDistanceSlider.addEventListener(
         "input",
         updateTimeDilation
     );
-
 }
 
 
-/* =========================================================
-   INFORMATION POPUPS
-   ========================================================= */
+// INFORMATION POPUPS
 
 const infoButtons =
     document.querySelectorAll(
@@ -967,105 +776,79 @@ const infoCloseButtons =
         ".info-close"
     );
 
-
-/* -----------------------------------------
-   Open information panel
------------------------------------------ */
+// Open information panel
 
 infoButtons.forEach(
     button => {
-
         button.addEventListener(
             "click",
             function () {
-
                 const targetId =
                     button.dataset.info;
-
 
                 if (!targetId) {
                     return;
                 }
-
 
                 const target =
                     document.getElementById(
                         targetId
                     );
 
-
                 if (!target) {
                     return;
                 }
 
-
-                /* Close other panels */
+                // Close other panels
 
                 infoPopups.forEach(
                     popup => {
-
                         if (
                             popup !== target
                         ) {
-
                             popup.classList.remove(
                                 "active"
                             );
-
                         }
-
                     }
                 );
 
 
-                /* Toggle current */
+                // Toggle current
 
                 target.classList.toggle(
                     "active"
                 );
-
             }
         );
-
     }
 );
 
 
-/* -----------------------------------------
-   Close information panel
------------------------------------------ */
+// Close information panel
 
 infoCloseButtons.forEach(
     button => {
-
         button.addEventListener(
             "click",
             function () {
-
                 const popup =
                     button.closest(
                         ".info-popup"
                     );
 
-
                 if (popup) {
-
                     popup.classList.remove(
                         "active"
                     );
-
                 }
-
             }
         );
-
     }
 );
 
 
-/* =========================================================
-   TUTORIAL
-   ========================================================= */
+// TUTORIAL
 
 const tutorialOverlay =
     document.getElementById(
@@ -1128,12 +911,9 @@ const tutorialContent =
     );
 
 
-/* =========================================================
-   TUTORIAL DATA
-   ========================================================= */
+// TUTORIAL DATA
 
 const tutorialSteps = [
-
     {
         title:
             "Step 1: Meet the Black Hole",
@@ -1143,7 +923,6 @@ const tutorialSteps = [
 
         image:
             "/static/tutorial/Step_1.png"
-
     },
 
     {
@@ -1155,7 +934,6 @@ const tutorialSteps = [
 
         image:
             "/static/tutorial/Step_2.png"
-
     },
 
     {
@@ -1167,7 +945,6 @@ const tutorialSteps = [
 
         image:
             "/static/tutorial/Step_3.png"
-
     },
 
     {
@@ -1179,7 +956,6 @@ const tutorialSteps = [
 
         image:
             "/static/tutorial/Step_4.png"
-
     },
 
     {
@@ -1191,7 +967,6 @@ const tutorialSteps = [
 
         image:
             "/static/tutorial/Step_5.png"
-
     }
 
 ];
@@ -1201,32 +976,20 @@ let currentTutorialStep =
     0;
 
 
-/* =========================================================
-   TUTORIAL IMAGE LOADER
-   ========================================================= */
-
-/*
-   Try several common file formats.
-
-   This makes the tutorial more tolerant if the
-   image extension or capitalization is different.
-*/
+// TUTORIAL IMAGE LOADER
 
 function loadTutorialImage(
     imagePath,
     title
 ) {
-
     if (!tutorialImage) {
         return;
     }
 
-
     tutorialImage.alt =
         title;
 
-
-    /* Normal path */
+    // Normal path
 
     tutorialImage.src =
         imagePath;
@@ -1235,35 +998,25 @@ function loadTutorialImage(
     tutorialImage.style.display =
         "block";
 
-
-    /* -----------------------------------------
-       If image fails
-    ----------------------------------------- */
+    // If image fails
 
     tutorialImage.onerror =
         function () {
-
             console.warn(
                 "Tutorial image could not be loaded:",
                 imagePath
             );
-
 
             const match =
                 imagePath.match(
                     /^(.*\/)([^/]+)\.(png|jpg|jpeg)$/i
                 );
 
-
             if (!match) {
-
                 tutorialImage.style.display =
                     "none";
-
                 return;
-
             }
-
 
             const folder =
                 match[1];
@@ -1271,18 +1024,10 @@ function loadTutorialImage(
             const filename =
                 match[2];
 
-
             const extension =
                 match[3].toLowerCase();
 
-
-            /*
-               Try alternative extensions / names.
-               Stop after a few attempts.
-            */
-
             const attempts = [
-
                 `${folder}${filename}.png`,
                 `${folder}${filename}.jpg`,
                 `${folder}${filename}.jpeg`,
@@ -1290,9 +1035,7 @@ function loadTutorialImage(
                 `${folder}${filename.toLowerCase()}.png`,
                 `${folder}${filename.toLowerCase()}.jpg`,
                 `${folder}${filename.toLowerCase()}.jpeg`
-
             ];
-
 
             const current =
                 tutorialImage.dataset.attempt || "0";
@@ -1300,52 +1043,37 @@ function loadTutorialImage(
             const index =
                 Number(current);
 
-
             if (
                 index <
                 attempts.length
             ) {
-
                 tutorialImage.dataset.attempt =
                     String(index + 1);
 
                 tutorialImage.src =
                     attempts[index];
-
             }
 
             else {
-
-                /*
-                   If none of the files exist,
-                   hide the broken image icon.
-                */
-
                 tutorialImage.style.display =
                     "none";
-
             }
-
         };
 
 
     tutorialImage.onload =
         function () {
-
             tutorialImage.style.display =
                 "block";
 
             tutorialImage.dataset.attempt =
                 "0";
-
         };
 
 }
 
 
-/* =========================================================
-   UPDATE TUTORIAL
-   ========================================================= */
+// UPDATE TUTORIAL
 
 function updateTutorial() {
 
@@ -1356,66 +1084,46 @@ function updateTutorial() {
         return;
     }
 
-
-    /* Make sure index is valid */
+    // Make sure index is valid
 
     if (
         currentTutorialStep < 0
     ) {
-
         currentTutorialStep =
             0;
-
     }
-
 
     if (
         currentTutorialStep >=
         tutorialSteps.length
     ) {
-
         currentTutorialStep =
             tutorialSteps.length - 1;
-
     }
-
 
     const step =
         tutorialSteps[
             currentTutorialStep
         ];
 
-
-    /* -----------------------------------------
-       Title
-    ----------------------------------------- */
+    // Title
 
     if (tutorialTitle) {
-
         tutorialTitle.textContent =
             step.title;
-
     }
 
-
-    /* -----------------------------------------
-       Text
-    ----------------------------------------- */
+    // Text
 
     if (tutorialText) {
-
         tutorialText.textContent =
             step.text;
-
     }
 
 
-    /* -----------------------------------------
-       Image
-    ----------------------------------------- */
+    // Image
 
     if (tutorialImage) {
-
         tutorialImage.dataset.attempt =
             "0";
 
@@ -1423,76 +1131,52 @@ function updateTutorial() {
             step.image,
             step.title
         );
-
     }
 
-
-    /* -----------------------------------------
-       Step number
-    ----------------------------------------- */
+    // Step number
 
     if (tutorialStepNumber) {
-
         tutorialStepNumber.textContent =
             String(
                 currentTutorialStep + 1
             );
-
     }
 
 
-    /* -----------------------------------------
-       Dots
-    ----------------------------------------- */
+    // Dots
 
     tutorialDots.forEach(
         (dot, index) => {
-
             dot.classList.toggle(
                 "active",
                 index === currentTutorialStep
             );
-
         }
     );
 
-
-    /* -----------------------------------------
-       Previous button
-    ----------------------------------------- */
+    // Previous button
 
     if (tutorialPrev) {
-
         tutorialPrev.style.visibility =
             currentTutorialStep === 0
                 ? "hidden"
                 : "visible";
-
     }
 
-
-    /* -----------------------------------------
-       Next button
-    ----------------------------------------- */
+    // Next button
 
     const isLastStep =
         currentTutorialStep ===
         tutorialSteps.length - 1;
 
-
     if (tutorialNext) {
-
         tutorialNext.style.visibility =
             isLastStep
                 ? "hidden"
                 : "visible";
-
     }
 
-
-    /* -----------------------------------------
-       Last step styling
-    ----------------------------------------- */
+    // Last step styling
 
     if (tutorialWindow) {
 
@@ -1500,50 +1184,36 @@ function updateTutorial() {
             "last-step",
             isLastStep
         );
-
     }
-
 }
 
 
-/* =========================================================
-   CHANGE TUTORIAL STEP
-   ========================================================= */
+// CHANGE TUTORIAL STEP
 
 function changeTutorialStep(
     direction
 ) {
-
     const newStep =
         currentTutorialStep +
         direction;
 
-
-    /* Prevent going outside */
+    // Prevent going outside
 
     if (
         newStep < 0 ||
         newStep >=
         tutorialSteps.length
     ) {
-
         return;
-
     }
 
-
-    /* -----------------------------------------
-       Fade animation
-    ----------------------------------------- */
+    // Fade animation
 
     if (tutorialContent) {
-
         tutorialContent.classList.add(
             "tutorial-changing"
         );
-
     }
-
 
     setTimeout(
         function () {
@@ -1551,400 +1221,247 @@ function changeTutorialStep(
             currentTutorialStep =
                 newStep;
 
-
             updateTutorial();
 
-
             if (tutorialContent) {
-
                 tutorialContent.classList.remove(
                     "tutorial-changing"
                 );
-
             }
-
         },
         180
     );
-
 }
 
 
-/* =========================================================
-   NEXT BUTTON
-   ========================================================= */
+// NEXT BUTTON
 
 if (tutorialNext) {
-
     tutorialNext.addEventListener(
         "click",
         function (event) {
-
             event.preventDefault();
-
             changeTutorialStep(1);
-
         }
     );
-
 }
 
 
-/* =========================================================
-   PREVIOUS BUTTON
-   ========================================================= */
+// PREVIOUS BUTTON
 
 if (tutorialPrev) {
-
     tutorialPrev.addEventListener(
         "click",
         function (event) {
-
             event.preventDefault();
-
             changeTutorialStep(-1);
-
         }
     );
-
 }
 
-
-/* =========================================================
-   DOT NAVIGATION
-   ========================================================= */
+// DOT NAVIGATION
 
 tutorialDots.forEach(
     (dot, index) => {
-
         dot.addEventListener(
             "click",
             function (event) {
-
                 event.preventDefault();
-
 
                 if (
                     index ===
                     currentTutorialStep
                 ) {
-
                     return;
-
                 }
 
-
                 if (tutorialContent) {
-
                     tutorialContent.classList.add(
                         "tutorial-changing"
                     );
-
                 }
-
 
                 setTimeout(
                     function () {
-
                         currentTutorialStep =
                             index;
 
-
                         updateTutorial();
 
-
                         if (tutorialContent) {
-
                             tutorialContent.classList.remove(
                                 "tutorial-changing"
                             );
-
                         }
-
                     },
                     180
                 );
-
             }
         );
-
     }
 );
 
-
-/* =========================================================
-   CLOSE TUTORIAL
-   ========================================================= */
+// CLOSE TUTORIAL
 
 function closeTutorial() {
-
     if (!tutorialOverlay) {
         return;
     }
 
-
-    /*
-       Important:
-       use display:none directly.
-
-       This works regardless of the CSS
-       display:flex setting.
-    */
-
     tutorialOverlay.style.display =
         "none";
-
-
-    /*
-       Prevent tutorial from interfering
-       with the rest of the page.
-    */
 
     tutorialOverlay.setAttribute(
         "aria-hidden",
         "true"
     );
-
 }
 
-
-/* =========================================================
-   OPEN TUTORIAL
-   ========================================================= */
+// OPEN TUTORIAL
 
 function openTutorial() {
-
     if (!tutorialOverlay) {
         return;
     }
 
-
     tutorialOverlay.style.display =
         "flex";
-
 
     tutorialOverlay.setAttribute(
         "aria-hidden",
         "false"
     );
 
-
     updateTutorial();
-
 }
 
-
-/* =========================================================
-   X BUTTON
-   ========================================================= */
+// X BUTTON
 
 if (tutorialClose) {
-
     tutorialClose.addEventListener(
         "click",
         function (event) {
-
             event.preventDefault();
             event.stopPropagation();
-
             closeTutorial();
-
         }
     );
-
 }
 
-
-/* =========================================================
-   GET STARTED BUTTON
-   ========================================================= */
+// GET STARTED BUTTON
 
 if (tutorialStart) {
-
     tutorialStart.addEventListener(
         "click",
         function (event) {
-
             event.preventDefault();
-
             closeTutorial();
-
         }
     );
-
 }
 
-
-/* =========================================================
-   KEYBOARD CONTROL
-   ========================================================= */
+// KEYBOARD CONTROL
 
 document.addEventListener(
     "keydown",
     function (event) {
 
-        /*
-           If tutorial doesn't exist,
-           do nothing.
-        */
-
         if (!tutorialOverlay) {
             return;
         }
-
-
-        /*
-           Check actual computed visibility.
-
-           This is more reliable than checking
-           tutorialOverlay.style.display === "none".
-        */
 
         const isVisible =
             window.getComputedStyle(
                 tutorialOverlay
             ).display !== "none";
 
-
         if (!isVisible) {
             return;
         }
-
-
-        /* -----------------------------------------
-           Right arrow
-        ----------------------------------------- */
 
         if (
             event.key ===
             "ArrowRight"
         ) {
-
             event.preventDefault();
-
             changeTutorialStep(1);
-
             return;
-
         }
 
-
-        /* -----------------------------------------
-           Left arrow
-        ----------------------------------------- */
+        // Left arrow
 
         if (
             event.key ===
             "ArrowLeft"
         ) {
-
             event.preventDefault();
-
             changeTutorialStep(-1);
-
             return;
-
         }
 
-
-        /* -----------------------------------------
-           X / x
-        ----------------------------------------- */
+        // X / x
 
         if (
             event.key === "x" ||
             event.key === "X"
         ) {
-
             event.preventDefault();
-
             closeTutorial();
-
             return;
-
         }
 
-
-        /* -----------------------------------------
-           Escape
-        ----------------------------------------- */
+        // Escape
 
         if (
             event.key ===
             "Escape"
         ) {
-
             event.preventDefault();
-
             closeTutorial();
-
         }
-
     }
 );
 
-/* =========================================================
-   TUTORIAL TOGGLE
-   ========================================================= */
+// TUTORIAL TOGGLE
 
 const tutorialToggle =
     document.getElementById("tutorial-toggle");
 
 if (tutorialToggle) {
-
     tutorialToggle.addEventListener(
         "click",
         function (event) {
-
             event.preventDefault();
-
-            /* 每次重新打开时，从第一步开始 */
             currentTutorialStep = 0;
-
             openTutorial();
-
         }
     );
-
 }
 
-/* =========================================================
-   INITIALIZATION
-   ========================================================= */
+// INITIALIZATION
 
 function initializePage() {
 
-    /* Black hole */
-
+    // Black hole
     updateBlackHole();
 
-
-    /* Light ray */
-
+    // Light ray
     updateRayDistance();
 
 
-    /* Time dilation */
-
+    // Time dilation
     updateTimeDilation();
 
 
-    /* Tutorial */
-
+    // Tutorial
     updateTutorial();
 
-
-    /* Clock animation */
-
+    // Clock animation
     requestAnimationFrame(
         updateClocks
     );
-
 }
 
-
-/* =========================================================
-   START
-   ========================================================= */
+// START
 
 initializePage();

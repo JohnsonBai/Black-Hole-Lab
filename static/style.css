@@ -1,6 +1,4 @@
-/* =========================================================
-   GLOBAL
-   ========================================================= */
+/* GLOBAL */
 
 * {
     box-sizing: border-box;
@@ -24,10 +22,7 @@ body {
     text-align: center;
 }
 
-
-/* =========================================================
-   HEADER
-   ========================================================= */
+/* HEADER */
 
 header {
     padding: 0 20px;
@@ -66,9 +61,7 @@ body > p {
 }
 
 
-/* =========================================================
-   MAIN SECTION
-   ========================================================= */
+/* MAIN SECTION */
 
 .main-section {
     width: min(92%, 1200px);
@@ -85,9 +78,7 @@ body > p {
 }
 
 
-/* =========================================================
-   BLACK HOLE
-   ========================================================= */
+/* BLACK HOLE */
 
 #black-hole-container {
     position: relative;
@@ -112,9 +103,7 @@ body > p {
 }
 
 
-/* =========================================================
-   ACCRETION DISK
-   ========================================================= */
+/* ACCRETION DISK */
 
 #accretion-disk-back,
 #accretion-disk-front {
@@ -166,23 +155,17 @@ body > p {
         disk-flow 7s ease-in-out infinite;
 }
 
-
 #accretion-disk-back {
     z-index: 2;
 
-    /*
-       Only show the upper half
-    */
+    /* Only show the upper half */
     clip-path: inset(0 0 50% 0);
 }
-
 
 #accretion-disk-front {
     z-index: 5;
 
-    /*
-       Only show the lower half
-    */
+    /* Only show the lower half */
     clip-path: inset(50% 0 0 0);
 }
 
@@ -238,9 +221,7 @@ body > p {
     }
 }
 
-/* =========================================================
-   BLACK HOLE
-   ========================================================= */
+/* BLACK HOLE */
 
 #black-hole {
     position: absolute;
@@ -253,10 +234,6 @@ body > p {
 
     background: #000000;
 
-    /*
-       Only a very subtle boundary.
-       No large orange halo.
-    */
     box-shadow:
         0 0 5px rgba(255, 150, 30, 0.18);
 
@@ -267,10 +244,7 @@ body > p {
         height 0.1s;
 }
 
-
-/* =========================================================
-   PHOTON ORBIT
-   ========================================================= */
+/* PHOTON ORBIT */
 
 #photon-orbit {
     position: absolute;
@@ -320,10 +294,7 @@ body > p {
     }
 }
 
-
-/* =========================================================
-   LIGHT RAY
-   ========================================================= */
+/* LIGHT RAY */
 
 #light-ray {
     position: absolute;
@@ -338,10 +309,7 @@ body > p {
     pointer-events: none;
 }
 
-
-/* =========================================================
-   PHYSICS INFO
-   ========================================================= */
+/* PHYSICS INFO */
 
 .physics-info {
     display: flex;
@@ -350,10 +318,7 @@ body > p {
     gap: 12px;
 }
 
-
-/* =========================================================
-   INFO CARD
-   ========================================================= */
+/* INFO CARD */
 
 .info-card {
     flex: 1;
@@ -400,10 +365,7 @@ body > p {
         0 4px 18px rgba(0, 0, 0, 0.45);
 }
 
-
-/* =========================================================
-   CARD HEADER
-   ========================================================= */
+/* CARD HEADER */
 
 .card-header {
     position: relative;
@@ -448,10 +410,7 @@ body > p {
     font-weight: bold;
 }
 
-
-/* =========================================================
-   INFO BUTTON
-   ========================================================= */
+/* INFO BUTTON */
 
 .info-button {
     position: absolute;
@@ -510,10 +469,7 @@ body > p {
         0 0 8px rgba(255, 180, 80, 0.15);
 }
 
-
-/* =========================================================
-   CONTROL PANEL
-   ========================================================= */
+/* CONTROL PANEL */
 
 .control-panel {
     width: min(92%, 1200px);
@@ -563,10 +519,7 @@ body > p {
         0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
-
-/* =========================================================
-   CONTROL HEADER
-   ========================================================= */
+/* CONTROL HEADER */
 
 .control-header {
     position: relative;
@@ -668,10 +621,7 @@ body > p {
     cursor: pointer;
 }
 
-
-/* =========================================================
-   TIME DILATION
-   ========================================================= */
+/* TIME DILATION */
 
 .time-dilation-panel {
     width: min(92%, 1200px);
@@ -696,10 +646,7 @@ body > p {
         0 0 15px rgba(0, 0, 0, 0.4);
 }
 
-
-/* =========================================================
-   TIME DILATION HEADER
-   ========================================================= */
+/* TIME DILATION HEADER */
 
 .experiment-header {
     position: relative;
@@ -730,10 +677,7 @@ body > p {
     right: 0;
 }
 
-
-/* =========================================================
-   CLOCKS
-   ========================================================= */
+/* CLOCKS */
 
 .clocks {
     display: flex;
@@ -799,10 +743,7 @@ body > p {
     font-size: 15px;
 }
 
-
-/* =========================================================
-   INFORMATION POPUP
-   ========================================================= */
+/* INFORMATION POPUP */
 
 .info-popup {
     display: none;
@@ -908,10 +849,7 @@ body > p {
     margin: 12px auto 0;
 }
 
-
-/* =========================================================
-   TUTORIAL OVERLAY
-   ========================================================= */
+/* TUTORIAL OVERLAY */
 
 #tutorial-overlay {
     position: fixed;
@@ -938,10 +876,7 @@ body > p {
     pointer-events: auto;
 }
 
-
-/* =========================================================
-   TUTORIAL WINDOW
-   ========================================================= */
+/* TUTORIAL WINDOW */
 
 .tutorial-window {
     position: relative;
@@ -980,10 +915,7 @@ body > p {
         tutorial-appear 0.25s ease-out;
 }
 
-
-/* =========================================================
-   TUTORIAL CLOSE BUTTON
-   ========================================================= */
+/* TUTORIAL CLOSE BUTTON */
 
 .tutorial-close {
     position: absolute;
@@ -1024,10 +956,7 @@ body > p {
     transform: scale(1.08);
 }
 
-
-/* =========================================================
-   TUTORIAL STEP
-   ========================================================= */
+/* TUTORIAL STEP */
 
 .tutorial-step {
     margin: 0 0 12px;
@@ -1038,10 +967,7 @@ body > p {
     letter-spacing: 3px;
 }
 
-
-/* =========================================================
-   TUTORIAL TITLE
-   ========================================================= */
+/* TUTORIAL TITLE */
 
 #tutorial-title {
     margin: 0 auto 20px;
@@ -1061,10 +987,7 @@ body > p {
         0 0 10px rgba(255, 180, 80, 0.15);
 }
 
-
-/* =========================================================
-   TUTORIAL CONTENT
-   ========================================================= */
+/* TUTORIAL CONTENT */
 
 .tutorial-content {
     position: relative;
@@ -1094,10 +1017,7 @@ body > p {
     pointer-events: none;
 }
 
-
-/* =========================================================
-   TUTORIAL IMAGE
-   ========================================================= */
+/* TUTORIAL IMAGE */
 
 #tutorial-image {
     display: block;
@@ -1116,10 +1036,7 @@ body > p {
     pointer-events: none;
 }
 
-
-/* =========================================================
-   TUTORIAL TEXT
-   ========================================================= */
+/* TUTORIAL TEXT */
 
 #tutorial-text {
     width: 100%;
@@ -1136,10 +1053,7 @@ body > p {
     text-align: center;
 }
 
-
-/* =========================================================
-   TUTORIAL NAVIGATION
-   ========================================================= */
+/* TUTORIAL NAVIGATION */
 
 .tutorial-navigation {
     position: relative;
@@ -1158,10 +1072,7 @@ body > p {
     pointer-events: auto;
 }
 
-
-/* =========================================================
-   TUTORIAL ARROWS
-   ========================================================= */
+/* TUTORIAL ARROWS */
 
 .tutorial-arrow {
     position: relative;
@@ -1210,10 +1121,7 @@ body > p {
         rgba(255, 180, 80, 0.08);
 }
 
-
-/* =========================================================
-   TUTORIAL DOTS
-   ========================================================= */
+/* TUTORIAL DOTS */
 
 .tutorial-dots {
     display: flex;
@@ -1244,10 +1152,7 @@ body > p {
     transform: scale(1.3);
 }
 
-
-/* =========================================================
-   GET STARTED
-   ========================================================= */
+/* GET STARTED */
 
 .tutorial-start {
     position: relative;
@@ -1295,7 +1200,6 @@ body > p {
         0 0 12px rgba(255, 150, 50, 0.12);
 }
 
-
 /* Last Step */
 
 .tutorial-window.last-step .tutorial-navigation {
@@ -1306,10 +1210,7 @@ body > p {
     display: block;
 }
 
-
-/* =========================================================
-   ANIMATIONS
-   ========================================================= */
+/* ANIMATIONS */
 
 @keyframes page-enter {
     from {
@@ -1351,10 +1252,7 @@ body > p {
     }
 }
 
-
-/* =========================================================
-   PAGE ENTRANCE
-   ========================================================= */
+/* PAGE ENTRANCE */
 
 header,
 .main-section,
@@ -1382,10 +1280,7 @@ header {
     animation-delay: 0.42s;
 }
 
-
-/* =========================================================
-   RESPONSIVE — TABLET
-   ========================================================= */
+/* RESPONSIVE — TABLET */
 
 @media (max-width: 900px) {
 
@@ -1410,10 +1305,7 @@ header {
     }
 }
 
-
-/* =========================================================
-   RESPONSIVE — PHONE
-   ========================================================= */
+/* RESPONSIVE — PHONE */
 
 @media (max-width: 600px) {
 
@@ -1430,7 +1322,6 @@ header {
         margin-bottom: 18px;
     }
 
-
     .main-section {
         width: 94%;
         gap: 15px;
@@ -1441,12 +1332,10 @@ header {
         border-radius: 10px;
     }
 
-
     .physics-info {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-
 
     .control-panel {
         width: 94%;
@@ -1464,7 +1353,6 @@ header {
         padding: 16px;
     }
 
-
     .time-dilation-panel {
         width: 94%;
         margin-bottom: 25px;
@@ -1477,7 +1365,6 @@ header {
     .clock-card {
         width: 100%;
     }
-
 
     .tutorial-window {
         width: 94%;
@@ -1500,9 +1387,7 @@ header {
 }
 
 
-/* =========================================================
-   VERY SMALL PHONE
-   ========================================================= */
+/* VERY SMALL PHONE */
 
 @media (max-width: 400px) {
 
@@ -1531,13 +1416,9 @@ header {
     }
 }
 
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {

@@ -6,14 +6,11 @@ from physics import (
     photon_sphere_radius
 )
 
-
 app = Flask(__name__)
-
 
 @app.route("/")
 def home():
     return render_template("index.html")
-
 
 @app.route("/calculate")
 def calculate():
@@ -30,7 +27,6 @@ def calculate():
         "event_horizon_radius": radius,
         "photon_sphere_radius": photon_radius
     })
-
 
 if __name__ == "__main__":
     app.run(debug=True)
